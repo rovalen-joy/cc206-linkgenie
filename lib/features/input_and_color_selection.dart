@@ -56,12 +56,34 @@ class input_and_color_selection extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
+          Center(
+          child: Column(
+            children: <Widget>[
+              ElevatedButton(
+                onPressed: know,
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.orangeAccent),
+                  padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                    EdgeInsets.all(16.10), // You can adjust this value as needed
+                  ),
+                ),
+                child: const Text(
+                  'CHANGE COLOR + ',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              Container(
+                child: Image.asset(
+                  'assets/colorswatch.png',
+                ),
+              ),
+            ],
+          ),
+        ),
           ],
         ),
       ),
     );
   }
-}
-
-  
+} 
    
