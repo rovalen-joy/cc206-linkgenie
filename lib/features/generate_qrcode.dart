@@ -7,14 +7,10 @@ class Generate_QR_Code extends StatelessWidget {
     // Define what should happen when the button is pressed
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('LinkGenie QR Code Generator'),
-          backgroundColor: Colors.deepOrangeAccent,
-        ),
         body: Center(
           child: Column(
             children: <Widget>[
