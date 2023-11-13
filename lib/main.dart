@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'features/input_and_color_selection.dart';
+import 'components/home_drawer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +33,40 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const input_and_color_selection(),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 1, // Length of tabs
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('LinkGenie QR Code Generator'),
+          backgroundColor: Colors.deepOrangeAccent,
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                  icon: Icon(Icons.auto_fix_high),
+                  text: 'Input and Color Selection'),
+            ],
+            labelColor: Colors.white, // Color of the text for selected tab
+            unselectedLabelColor:
+                Colors.grey, // Color of the text for unselected tabs
+          ),
+        ),
+        drawer: const HomeDrawer(),
+        body: const TabBarView(
+          children: [
+            input_and_color_selection(),
+          ],
+        ),
+      ),
     );
   }
 }
