@@ -54,6 +54,15 @@ dev_dependencies:
 flutter:
   assets:
     - assets/qrcode.png
+    - assets/logo.png
+    - assets/qr.png
+  
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Bold.ttf
+          weight: 500
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

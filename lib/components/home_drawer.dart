@@ -22,8 +22,8 @@ class HomeDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.auto_fix_high),
-            title: Text('Generate QR Code'),
+            leading: Icon(Icons.center_focus_strong_outlined),
+            title: Text('Generated QR Code'),
             onTap: () {
               Navigator.pop(context);
             },
