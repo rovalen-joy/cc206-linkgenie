@@ -44,29 +44,44 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 1, // Length of tabs
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('LinkGenie QR Code Generator'),
-          backgroundColor: Colors.deepOrangeAccent,
-          bottom: TabBar(
-            tabs: [
-              Tab(
-                  icon: Icon(Icons.auto_fix_high),
-                  text: 'Input and Color Selection'),
-            ],
-            labelColor: Colors.white, // Color of the text for selected tab
-            unselectedLabelColor:
-                Colors.grey, // Color of the text for unselected tabs
-          ),
-        ),
-        drawer: const HomeDrawer(),
-        body: const TabBarView(
+  length: 1,
+  child: Scaffold(
+    appBar: AppBar(
+      title: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            input_and_color_selection(),
+            Text(
+              'LINKGENIE',
+              style: TextStyle(color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),
+            ),
+            SizedBox(width: 8),
+            Image.asset(
+              'assets/logo.png',
+              height: 30,
+            ),
           ],
         ),
       ),
-    );
+      backgroundColor: Colors.deepOrangeAccent,
+      bottom: TabBar(
+        tabs: [
+          Tab(
+            icon: Icon(Icons.app_registration_outlined),
+            text: 'Input and Color Selection',
+          ),
+        ],
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.grey,
+      ),
+    ),
+    drawer: const HomeDrawer(),
+    body: const TabBarView(
+      children: [
+        input_and_color_selection(),
+      ],
+    ),
+  ),
+);
   }
 }
