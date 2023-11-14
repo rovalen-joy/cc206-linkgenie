@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'features/generate_qrcode.dart';
-import 'components/home_drawer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,45 +42,31 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-    length: 1, // Length of tabs
-    child: Scaffold(
-    appBar: AppBar(
-      title: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'LINKGENIE',
-              style: TextStyle(color: Colors.black, fontSize: 50, fontWeight: FontWeight.bold, fontFamily: 'Roboto'),
-            ),
-            SizedBox(width: 8),
-            Image.asset(
-              'assets/logo.png',
-              height: 50,
-            ),
-          ],
-        ),
-      ),
-      backgroundColor: Colors.deepOrangeAccent,
-      bottom: TabBar(
-        tabs: [
-          Tab(
-            icon: Icon(Icons.center_focus_strong_outlined),
-            text: 'Generated QR Code',
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'LINKGENIE',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Roboto'),
+              ),
+              SizedBox(width: 8),
+              Image.asset(
+                'assets/logo.png',
+                height: 50,
+              ),
+            ],
           ),
-        ],
-        labelColor: Colors.white,
-        unselectedLabelColor: Colors.grey,
+        ),
+        backgroundColor: Colors.deepOrangeAccent,
       ),
-    ),
-    drawer: const HomeDrawer(),
-    body: const TabBarView(
-      children: [
-        Generate_QR_Code(),
-      ],
-    ),
-  ),
+      body: const Generate_QR_Code(), // Display your main widget here
     );
   }
 }
