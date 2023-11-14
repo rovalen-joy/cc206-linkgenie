@@ -13,30 +13,6 @@ class input_and_color_selection extends StatelessWidget {
 
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'LINKGENIE',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Roboto',
-                  ),
-                ),
-                SizedBox(width: 8),
-                Image.asset(
-                  'assets/logo.png',
-                  height: 40,
-                ),
-              ],
-            ),
-          ),
-          backgroundColor: Colors.deepOrangeAccent,
-        ),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -60,11 +36,11 @@ class input_and_color_selection extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 TextButton(
                   onPressed: know,
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 252, 247, 242)),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Color.fromARGB(255, 252, 247, 242)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -83,9 +59,7 @@ class input_and_color_selection extends StatelessWidget {
                     style: TextStyle(color: Colors.black, fontSize: 17),
                   ),
                 ),
-
                 SizedBox(height: 20),
-
                 Container(
                   width: 300.0,
                   child: Container(
@@ -100,13 +74,12 @@ class input_and_color_selection extends StatelessWidget {
                     child: Image.asset('assets/qr.png'),
                   ),
                 ),
-
                 SizedBox(height: 90),
-
                 ElevatedButton(
                   onPressed: know,
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.orangeAccent),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.orangeAccent),
                     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                       EdgeInsets.all(16.10), // Padding
                     ),
@@ -116,9 +89,7 @@ class input_and_color_selection extends StatelessWidget {
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
-
                 SizedBox(height: 20),
-
                 Container(
                   width: 0.6 * screenWidth,
                   child: Image.asset(
@@ -126,9 +97,7 @@ class input_and_color_selection extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                   ),
                 ),
-
                 SizedBox(height: 20),
-
                 Container(
                   width: 0.6 * screenWidth,
                   child: Image.asset(
@@ -136,9 +105,7 @@ class input_and_color_selection extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                   ),
                 ),
-
                 SizedBox(height: 20),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -149,8 +116,10 @@ class input_and_color_selection extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: know,
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 241, 184, 98)),
-                          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color.fromARGB(255, 241, 184, 98)),
+                          padding:
+                              MaterialStateProperty.all<EdgeInsetsGeometry>(
                             EdgeInsets.symmetric(
                               vertical: 10.0,
                               horizontal: 20.0,
@@ -170,8 +139,10 @@ class input_and_color_selection extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: know,
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 241, 184, 98)),
-                          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Color.fromARGB(255, 241, 184, 98)),
+                          padding:
+                              MaterialStateProperty.all<EdgeInsetsGeometry>(
                             EdgeInsets.symmetric(
                               vertical: 10.0,
                               horizontal: 20.0,
@@ -186,13 +157,12 @@ class input_and_color_selection extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 SizedBox(height: 100),
-
                 ElevatedButton(
                   onPressed: know,
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 235, 111, 9)),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Color.fromARGB(255, 235, 111, 9)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -204,7 +174,9 @@ class input_and_color_selection extends StatelessWidget {
                   ),
                   child: const Text(
                     'Generate QR Code',
-                    style: TextStyle(color: Color.fromARGB(255, 253, 250, 250), fontSize: 25),
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 253, 250, 250),
+                        fontSize: 25),
                   ),
                 ),
               ],
