@@ -9,13 +9,32 @@ class input_and_color_selection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth =
-        MediaQuery.of(context).size.width; //screen width for responsiveness
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('LinkGenie QR Code Generator'),
+          title: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'LINKGENIE',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Roboto',
+                  ),
+                ),
+                SizedBox(width: 8),
+                Image.asset(
+                  'assets/logo.png',
+                  height: 40,
+                ),
+              ],
+            ),
+          ),
           backgroundColor: Colors.deepOrangeAccent,
         ),
         body: SingleChildScrollView(
@@ -23,47 +42,71 @@ class input_and_color_selection extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 20), // Spacing from the top for padding
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.orangeAccent),
-                      ),
-                      child: const Text('URL'),
-                    ),
-                    SizedBox(
-                        width: 10), // Spacing between the URL and Text buttons
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.orangeAccent),
-                      ),
-                      child: const Text('Text'),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                    height: 10), // Spacing between the textfield and buttons
+                SizedBox(height: 20),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0), // Padding
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Enter any URL or text to generate...',
-                      border: OutlineInputBorder(),
-                    ),
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Enter any URL or Text to generate',
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 50),
+                    ],
                   ),
                 ),
-                SizedBox(height: 10),
+
+                TextButton(
+                  onPressed: know,
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 252, 247, 242)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(
+                          color: Colors.black,
+                          width: 2,
+                        ),
+                      ),
+                    ),
+                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    ),
+                  ),
+                  child: Text(
+                    'QR Code Preview',
+                    style: TextStyle(color: Colors.black, fontSize: 17),
+                  ),
+                ),
+
+                SizedBox(height: 20),
+
+                Container(
+                  width: 300.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 5),
+                      borderRadius: BorderRadius.circular(30),
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      boxShadow: [
+                        BoxShadow(blurRadius: 5.0, offset: Offset(5.0, 5.0)),
+                      ],
+                    ),
+                    child: Image.asset('assets/qr.png'),
+                  ),
+                ),
+
+                SizedBox(height: 90),
+
                 ElevatedButton(
                   onPressed: know,
                   style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.orangeAccent),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.orangeAccent),
                     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                       EdgeInsets.all(16.10), // Padding
                     ),
@@ -73,40 +116,45 @@ class input_and_color_selection extends StatelessWidget {
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
-                SizedBox(height: 20), //for Spacing
+
+                SizedBox(height: 20),
+
                 Container(
-                  width: 0.8 * screenWidth,
+                  width: 0.6 * screenWidth,
                   child: Image.asset(
                     'assets/colorswatch.png',
                     fit: BoxFit.fitWidth,
                   ),
                 ),
-                SizedBox(height: 20), //for Spacing
+
+                SizedBox(height: 20),
+
                 Container(
-                  width: 0.8 * screenWidth,
+                  width: 0.6 * screenWidth,
                   child: Image.asset(
                     'assets/colorpicker.png',
                     fit: BoxFit.fitWidth,
                   ),
                 ),
-                SizedBox(height: 20), //for Spacing
+
+                SizedBox(height: 20),
+
                 Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .center, //Center two 'Select Manually' buttons in the row
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          right: 0.15 *
-                              screenWidth), //for spacing to the right of the first 'Select Manually' button
+                        right: 0.15 * screenWidth,
+                      ),
                       child: ElevatedButton(
                         onPressed: know,
                         style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.orange),
-                          padding:
-                              MaterialStateProperty.all<EdgeInsetsGeometry>(
+                          backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 241, 184, 98)),
+                          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                             EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 20.0), //Padding
+                              vertical: 10.0,
+                              horizontal: 20.0,
+                            ),
                           ),
                         ),
                         child: const Text(
@@ -117,17 +165,17 @@ class input_and_color_selection extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: 0.15 *
-                              screenWidth), //for spacing to the left of the second 'Select Manually' button
+                        left: 0.15 * screenWidth,
+                      ),
                       child: ElevatedButton(
                         onPressed: know,
                         style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.orange),
-                          padding:
-                              MaterialStateProperty.all<EdgeInsetsGeometry>(
+                          backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 241, 184, 98)),
+                          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                             EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 20.0), //Padding
+                              vertical: 10.0,
+                              horizontal: 20.0,
+                            ),
                           ),
                         ),
                         child: const Text(
@@ -138,7 +186,27 @@ class input_and_color_selection extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20), //for Spacing
+
+                SizedBox(height: 100),
+
+                ElevatedButton(
+                  onPressed: know,
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(255, 235, 111, 9)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                      EdgeInsets.symmetric(vertical: 25.0, horizontal: 25.0),
+                    ),
+                  ),
+                  child: const Text(
+                    'Generate QR Code',
+                    style: TextStyle(color: Color.fromARGB(255, 253, 250, 250), fontSize: 25),
+                  ),
+                ),
               ],
             ),
           ),

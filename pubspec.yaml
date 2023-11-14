@@ -55,6 +55,14 @@ flutter:
   assets:
     - assets/colorswatch.png
     - assets/colorpicker.png
+    - assets/qr.png
+    - assets/logo.png
+
+  fonts:
+      - family: Roboto
+        fonts:
+          - asset: fonts/Roboto-Bold.ttf
+            weight: 100
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -80,7 +88,6 @@ flutter:
   # fonts:
   #   - family: Schyler
   #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
