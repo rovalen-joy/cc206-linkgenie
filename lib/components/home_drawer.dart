@@ -22,8 +22,8 @@ class HomeDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.app_registration_outlined),
-            title: Text('Input and Color Selection'),
+            leading: Icon(Icons.question_answer),
+            title: Text('FAQ'),
             onTap: () {
               Navigator.pop(context);
             },

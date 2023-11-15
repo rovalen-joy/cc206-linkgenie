@@ -25,23 +25,17 @@ class FAQPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'LINKGENIE',
+              'FREQUENTLY ASKED QUESTIONS',
               style: TextStyle(
                 fontSize: 30.0,
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 13, 13, 13),
+                color: Color.fromARGB(255, 255, 254, 254),
                 fontFamily: 'Roboto',
               ),
             ),
-            SizedBox(width: 20),
-            Image.asset(
-              'assets/logo.png',
-              height: 30,
-            ),
           ],
         ),
-        backgroundColor: primaryColor, // Add color to AppBar
-        elevation: 0,
+        backgroundColor: primaryColor, // Using primaryColor here
       ),
       body: ListView(
         children: [
@@ -50,16 +44,6 @@ class FAQPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  'FAQ\'S',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 224, 85, 4),
-                    fontFamily: 'Roboto',
-                  ),
-                ),
-                SizedBox(height: 8.0),
                 Text(
                   'I’m new to LinkGenie QR Code Generator. What should I know? Glad you asked! Here’s a few basics to get you started.',
                   style: TextStyle(
