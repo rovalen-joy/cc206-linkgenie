@@ -60,7 +60,7 @@ flutter:
     - family: Roboto
       fonts:
         - asset: fonts/Roboto-Bold.ttf
-          weight: 500
+          weight: 100
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
