@@ -17,7 +17,7 @@ class FAQPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color primaryColor =
-        Color.fromARGB(255, 255, 102, 0); // Set the primary colors
+        Color.fromARGB(255, 243, 108, 17); // Set the primary colors
 
     return Scaffold(
       appBar: AppBar(

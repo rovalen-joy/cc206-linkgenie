@@ -1,5 +1,5 @@
-import 'package:cc206_linkgenie/features/frequently_asked_questions.dart';
 import 'package:flutter/material.dart';
+import 'features/frequently_asked_questions.dart';
 import 'components/home_drawer.dart';
 
 void main() {
@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'FAQPage',
         theme: ThemeData(
-       
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),

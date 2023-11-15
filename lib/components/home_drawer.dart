@@ -28,16 +28,8 @@ class HomeDrawer extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          ListTile(
-            leading: Icon(Icons.person_pin_rounded),
-            title: Text('About Us'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
         ],
       ),
     );
   }
 }
-
