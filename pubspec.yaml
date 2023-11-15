@@ -53,10 +53,8 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/colorswatch.png
-    - assets/colorpicker.png
     - assets/logo.png
-    - assets/qr.png
+    - assets/link.png
 
   fonts:
     - family: Roboto
