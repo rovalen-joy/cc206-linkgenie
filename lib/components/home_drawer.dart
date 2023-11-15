@@ -22,15 +22,8 @@ class HomeDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.question_answer),
-            title: Text('FAQ'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.person_pin_rounded),
-            title: Text('About Us'),
+            leading: Icon(Icons.app_registration_outlined),
+            title: Text('Input and Color Selection'),
             onTap: () {
               Navigator.pop(context);
             },
@@ -40,4 +33,3 @@ class HomeDrawer extends StatelessWidget {
     );
   }
 }
-
