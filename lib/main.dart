@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'features/input_and_color_selection.dart';
+import '/features/frequently_asked_questions.dart';
 import 'components/home_drawer.dart';
 
 void main() {

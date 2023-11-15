@@ -11,7 +11,7 @@ class HomeDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.deepOrangeAccent,
+              color: Color.fromARGB(255, 243, 108, 17),
             ),
             child: Text(
               'Link Genie',
