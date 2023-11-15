@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'features/generate_qrcode.dart';
+import 'features/input_and_color_selection.dart';
+import '/features/frequently_asked_questions.dart';
+import 'components/home_drawer.dart';
+
 
 void main() {
   runApp(const MyApp());
