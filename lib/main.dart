@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'features/input_and_color_selection.dart';
-import '/features/frequently_asked_questions.dart';
 import 'components/home_drawer.dart';
 
 void main() {
@@ -58,7 +57,7 @@ class MyApp extends StatelessWidget {
                 ],
               ),
             ),
-            backgroundColor: Colors.deepOrangeAccent,
+            backgroundColor: Color.fromARGB(255, 243, 108, 17),
           ),
           body: const input_and_color_selection(),
         ));
