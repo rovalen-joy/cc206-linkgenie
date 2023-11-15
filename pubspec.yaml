@@ -53,16 +53,16 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/colorswatch.png
-    - assets/colorpicker.png
-    - assets/qr.png
+    - assets/qrcode.png
     - assets/logo.png
-
+    - assets/qr.png
+  
   fonts:
       - family: Roboto
         fonts:
           - asset: fonts/Roboto-Bold.ttf
             weight: 100
+
 
 
   # The following line ensures that the Material Icons font is
