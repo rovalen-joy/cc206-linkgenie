@@ -56,6 +56,9 @@ flutter:
     - assets/qrcode.png
     - assets/logo.png
     - assets/qr.png
+    - assets/link.png
+    - assets/colorswatch.png
+    - assets/colorpicker.png
   
   fonts:
       - family: Roboto

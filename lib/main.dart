@@ -1,9 +1,9 @@
+import 'package:cc206_linkgenie/components/home_drawer.dart';
 import 'package:flutter/material.dart';
-import 'features/generate_qrcode.dart';
 import 'features/input_and_color_selection.dart';
-import '/features/frequently_asked_questions.dart';
-import 'components/home_drawer.dart';
-
+import 'features/generate_qrcode.dart';
+import 'features/frequently_asked_questions.dart';
+import 'features/about-us.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,7 +36,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(),
+        '/about-us': (context) => About_Us(),
+        '/faq': (context) => FrequentlyAskedQuestions(),
+        '/input-color': (context) => input_and_color_selection(),
+        '/generate-qrcode': (context) => Generate_QR_Code()
+      },
     );
   }
 }
@@ -68,9 +75,10 @@ class MyHomePage extends StatelessWidget {
             ],
           ),
         ),
-        backgroundColor: Colors.deepOrangeAccent,
+        backgroundColor: Color.fromARGB(255, 243, 108, 17),
       ),
-      body: const Generate_QR_Code(), // Display your main widget here
+      drawer: const HomeDrawer(),
+      body: input_and_color_selection(),
     );
   }
 }

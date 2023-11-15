@@ -5,9 +5,7 @@ void main() => runApp(FrequentlyAskedQuestions());
 class FrequentlyAskedQuestions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: FAQPage(),
-    );
+    return FAQPage();
   }
 }
 
