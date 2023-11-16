@@ -10,31 +10,29 @@ class FrequentlyAskedQuestions extends StatelessWidget {
 }
 
 class FAQPage extends StatelessWidget {
-  const FAQPage({super.key});
+  const FAQPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
     Color primaryColor =
-        Color.fromARGB(255, 255, 102, 0); // Set the primary colors
+    Color.fromARGB(255, 255, 102, 0); // Set the primary colors
 
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'FREQUENTLY ASKED QUESTIONS',
-              style: TextStyle(
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 255, 254, 254),
-                fontFamily: 'Roboto',
-              ),
-            ),
-          ],
+        centerTitle: true,
+        title: Text(
+          'FAQs',
+          style: TextStyle(
+            color: const Color.fromARGB(255, 255, 254, 254),
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Roboto',
+          ),
         ),
-        backgroundColor: primaryColor, // Using primaryColor here
+        backgroundColor: Color.fromARGB(255, 243, 108, 17),
       ),
+      
+      
       body: ListView(
         children: [
           Padding(

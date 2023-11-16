@@ -63,14 +63,14 @@ class MyHomePage extends StatelessWidget {
                 'LINKGENIE',
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: 50,
+                    fontSize: 40,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Roboto'),
               ),
               SizedBox(width: 8),
               Image.asset(
                 'assets/logo.png',
-                height: 50,
+                height: 40,
               ),
             ],
           ),

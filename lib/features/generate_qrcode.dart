@@ -17,7 +17,7 @@ class Generate_QR_Code extends StatelessWidget {
             Text(
               'GENERATED QR CODE:',
               style: TextStyle(
-                  color: Colors.black, fontSize: 40, fontFamily: 'Roboto'),
+                  color: Colors.black, fontSize: 30, fontFamily: 'Roboto'),
             ),
             SizedBox(height: 20), // Adjust the spacing as needed
 

@@ -132,7 +132,7 @@ class input_and_color_selection extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                      left: 0.15 * screenWidth,
+                      left: 0.01 * screenWidth,
                     ),
                     child: ElevatedButton(
                       onPressed: know,

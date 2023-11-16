@@ -13,11 +13,8 @@ class About_Us extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
+        centerTitle: true,
+        title: Text(
                 'ABOUT US',
                 style: TextStyle(
                   color: const Color.fromARGB(255, 255, 254, 254),
@@ -26,11 +23,9 @@ class About_Us extends StatelessWidget {
                   fontFamily: 'Roboto',
                 ),
               ),
-            ],
-          ),
-        ),
         backgroundColor: Color.fromARGB(255, 243, 108, 17),
       ),
+
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -40,61 +35,9 @@ class About_Us extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth < 900 ? 16.0 : 400.0),
-                        child: Text(
-                          'LINKGENIE',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: screenWidth < 800 ? screenWidth - 32 : 650,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'LinkGenie QR Code Generator boasts an array of user-friendly features, simplifying the process of generating QR codes and enhancing the overall user experience with its user-friendly interface. LinkGenie presents an impressive set of features designed to simplify QR code generation making it more accessible and efficient.',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: const Color.fromARGB(255, 0, 0, 0),
-                              ),
-                              textAlign: TextAlign.justify,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                    Container(
-                      width: 200,
-                      height: 180,
+                Container(
+                      width: 120,
+                      height: 100,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
@@ -103,17 +46,76 @@ class About_Us extends StatelessWidget {
                         ),
                       ),
                     ),
+                
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 100.0),
+                          child: Text(
+                            'LINKGENIE',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-                SizedBox(height: 60),
+                
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 320,
+                      height: 300,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'LinkGenie QR Code Generator boasts an array of user-friendly features, simplifying the process of generating QR codes and enhancing the overall user experience with its user-friendly interface. LinkGenie presents an impressive set of features designed to simplify QR code generation making it more accessible and efficient.',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                                color: const Color.fromARGB(255, 0, 0, 0),
+                              ),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                  ],
+                ),
+                
+                
+                SizedBox(height: 30),
                 Text(
                   'VERSION 2.0',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
+
                 SizedBox(height: 10),
                 Container(
                   width: 700,
-                  height: 250,
+                  height: 320,
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Colors.black,
@@ -127,6 +129,8 @@ class About_Us extends StatelessWidget {
                       ),
                     ],
                   ),
+                  
+                  
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
@@ -175,6 +179,8 @@ class About_Us extends StatelessWidget {
                     ),
                   ),
                 ),
+                
+                
                 SizedBox(height: 100),
                 Container(
                   child: Center(
@@ -196,6 +202,8 @@ class About_Us extends StatelessWidget {
                       fontWeight: FontWeight.w500),
                 ),
                 Text('Support Center: Linkgenie_theshieldren Help desk'),
+                
+                
                 SizedBox(height: 80),
                 Container(
                   child: Center(
