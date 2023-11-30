@@ -5,211 +5,157 @@ void main() => runApp(FrequentlyAskedQuestions());
 class FrequentlyAskedQuestions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: FAQPage(),
-    );
+    return FAQPage();
   }
 }
 
-class FAQPage extends StatelessWidget {
-  const FAQPage({super.key});
+class FAQPage extends StatefulWidget {
+  const FAQPage({Key? key}) : super(key: key);
+
+  @override
+  _FAQPageState createState() => _FAQPageState();
+}
+
+class _FAQPageState extends State<FAQPage> {
+  List<bool> _isExpandedList = [false, false, false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
-    Color primaryColor =
-        Color.fromARGB(255, 255, 102, 0); // Set the primary colors
-
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        centerTitle: true,
+        title: Text(
+          'FAQs',
+          style: TextStyle(
+            color: const Color.fromARGB(255, 255, 254, 254),
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Roboto',
+          ),
+        ),
+        backgroundColor: Color.fromARGB(255, 243, 108, 17),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: ListView(
           children: [
             Text(
-              'FREQUENTLY ASKED QUESTIONS',
+              'I’m new to LinkGenie QR Code Generator. What should I know? Glad you asked! Here’s a few basics to get you started.',
+              textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 255, 254, 254),
+                fontSize: 16.0,
+                fontStyle: FontStyle.italic,
+                color: Colors.orange,
                 fontFamily: 'Roboto',
               ),
             ),
-          ],
-        ),
-        backgroundColor: primaryColor, // Using primaryColor here
-      ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            SizedBox(height: 20.0),
+            ExpansionPanelList(
+              elevation: 1,
+              expandedHeaderPadding: EdgeInsets.all(0),
+              expansionCallback: (panelIndex, isExpanded) {
+                setState(() {
+                  _isExpandedList[panelIndex] = !isExpanded;
+                });
+              },
               children: [
-                Text(
-                  'I’m new to LinkGenie QR Code Generator. What should I know? Glad you asked! Here’s a few basics to get you started.',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.orange,
-                    fontFamily: 'Roboto',
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                // FAQ Tiles...
-                ExpansionTile(
-                  title: Text(
-                    'What is a QR Code?',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Roboto',
-                    ), // Text color
-                  ),
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'A QR Code, or Quick Response Code, is a two-dimensional barcode that can store various types of information, such as text, URLs, contact information, or other data. It can be scanned using a QR Code reader or a smartphone camera.',
-                        style: TextStyle(
-                          color: const Color.fromARGB(255, 6, 6, 6),
-                          fontFamily: 'Roboto',
-                        ), // Text color
-                      ),
-                    ),
-                  ],
-                ),
-                ExpansionTile(
-                  title: Text(
-                    'How does a LinkGenie QR Code Generator work?',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Yes, our LinkGenie QR Code Generator is completely free to use. Simply input your data, customize the settings if needed, and generate your QR Code instantly.',
-                        style: TextStyle(
-                          color: const Color.fromARGB(255, 11, 11, 11),
-                          fontFamily: 'Roboto',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                ExpansionTile(
-                  title: Text(
-                    'Is it free to use your LinkGenie QR Code Generator?',
-                    style: TextStyle(
-                      color: const Color.fromARGB(255, 11, 11, 11),
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        children: [
-                          Text(
-                            'LinkGenie QR Code Generator is a mobile app that allows you to create QR Codes by inputting the information you want to encode.',
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 9, 9, 9),
-                              fontFamily: 'Roboto',
-                            ),
-                          ),
-                          SizedBox(height: 8.0),
-                          Text(
-                            'The generator then translates this data into a QR Code image, which you can download and use.',
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 5, 5, 5),
-                              fontFamily: 'Roboto',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                ExpansionTile(
-                  title: Text(
-                    'Can I customize the appearance of the QR Code?',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Yes, our LinkGenie QR Code Generator allows you to customize the appearance of your QR Code. You can choose automatically from different style and color options or you can manually select it from the color palette tool.',
-                        style: TextStyle(
-                          color: const Color.fromARGB(255, 11, 11, 11),
-                          fontFamily: 'Roboto',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                ExpansionTile(
-                  title: Text(
-                    'How do I scan a QR Code?',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 11, 11, 11),
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        children: [
-                          Text(
-                            'To scan a QR Code, you need a QR Code reader app on your smartphone. Most smartphones have built-in cameras that can scan QR Codes.',
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 9, 9, 9),
-                              fontFamily: 'Roboto',
-                            ),
-                          ),
-                          SizedBox(height: 8.0),
-                          Text(
-                            'Open the QR Code reader app, point your camera at the QR Code, and the information will be displayed or the linked action will be performed.',
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 5, 5, 5),
-                              fontFamily: 'Roboto',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                ExpansionTile(
-                  title: Text(
-                    'Can I edit or update a QR Code after it has been generated?',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Once a QR Code is generated, its content is fixed. If you need to update the information, you will need to generate a new QR Code with the updated data.',
-                        style: TextStyle(
-                          color: const Color.fromARGB(255, 11, 11, 11),
-                          fontFamily: 'Roboto',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                _buildExpansionPanel(
+                    index: 0,
+                    title: 'What is a QR Code?',
+                    body:
+                        'A QR Code, or Quick Response Code, is a two-dimensional barcode that can store various types of information, such as text, URLs, contact information, or other data.  It can be scanned using a QR Code reader or a smartphone camera.',
+                    isExpanded: _isExpandedList[0],
+                    color: Color.fromARGB(255, 252, 248, 247)),
+                _buildExpansionPanel(
+                    index: 1,
+                    title: 'How does a LinkGenie QR Code Generator work?',
+                    body:
+                        'Absolutely, our LinkGenie QR Code Generator is entirely free of charge. Just enter your information, customize to the settings, and instantly generate your QR Code. It is a user-friendly tool designed to simplify the process of creating QR Codes for your convenience',
+                    isExpanded: _isExpandedList[1],
+                    color: Color.fromARGB(255, 250, 248, 248)),
+                _buildExpansionPanel(
+                    index: 2,
+                    title:
+                        'Is it free to use your LinkGenie QR Code Generator?',
+                    body:
+                        'LinkGenie QR Code Generator is a web app that allows you to create QR Codes by inputting the information you want to encode.  The generator then translates this data into a QR Code image, which you can download and use.',
+                    isExpanded: _isExpandedList[2],
+                    color: Color.fromARGB(255, 252, 248, 247)),
+                _buildExpansionPanel(
+                    index: 3,
+                    title: 'Can I customize the appearance of the QR Code?',
+                    body:
+                        'Yes, our LinkGenie QR Code Generator allows you to customize the appearance of your QR Code.  You can choose automatically from different style and color options or you can manually select it from the color palette tool.',
+                    isExpanded: _isExpandedList[3],
+                    color: Color.fromARGB(255, 250, 248, 248)),
+                _buildExpansionPanel(
+                    index: 4,
+                    title: 'How do I scan a QR Code?',
+                    body:
+                        'To scan a QR Code, you need a QR Code reader app on your smartphone. Most smartphones have built-in cameras that can scan QR Codes.  Open the QR Code reader app, point your camera at the QR Code, and the information will be displayed or the linked action will be performed.',
+                    isExpanded: _isExpandedList[4],
+                    color: Color.fromARGB(255, 252, 248, 247)),
+                _buildExpansionPanel(
+                    index: 5,
+                    title:
+                        'Can I edit or update a QR Code after it has been generated?',
+                    body:
+                        'Once a QR Code has been generated, its information remains unchangeable. To modify the content, a new QR Code must be generated with the updated data, ensuring the accuracy of the encoded information.',
+                    isExpanded: _isExpandedList[5],
+                    color: Color.fromARGB(255, 250, 248, 248)),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+    );
+  }
+
+  ExpansionPanel _buildExpansionPanel({
+    required int index,
+    required String title,
+    required String body,
+    required bool isExpanded,
+    required Color color,
+  }) {
+    return ExpansionPanel(
+      backgroundColor: color,
+      headerBuilder: (BuildContext context, bool isExpanded) {
+        return GestureDetector(
+          onTap: () {
+            setState(() {
+              _isExpandedList[index] = !_isExpandedList[index];
+            });
+          },
+          child: Padding(
+            // Styling for the Title of the ExpansionPanelList
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              title,
+              style: TextStyle(
+                color: const Color.fromARGB(255, 0, 0, 0),
+                fontFamily: 'Anton',
+                fontSize: 15,
+              ),
+            ),
+          ),
+        );
+      },
+      body: Padding(
+        //Styling for the Body of the ExpansionPanelList
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          body,
+          textAlign: TextAlign.start,
+          style: TextStyle(
+            color: const Color.fromARGB(255, 0, 0, 0),
+            fontFamily: 'Arimo',
+            fontSize: 12,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ),
+      isExpanded: _isExpandedList[index],
     );
   }
 }
