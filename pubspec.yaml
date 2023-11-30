@@ -59,6 +59,9 @@ flutter:
     - assets/logo.png
     - assets/link.png
     - assets/shieldrencorp.png
+    - assets/link.png
+    - assets/shieldrencorp.png
+
   fonts:
       - family: Roboto
         fonts:
@@ -72,11 +75,6 @@ flutter:
         fonts:
           - asset: assets/fonts/Anton-Regular.ttf
       
-      - family: DM Serif Display
-        fonts:
-          - asset: assets/fonts/DMSerifDisplay-Regular.ttf
-
-
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
