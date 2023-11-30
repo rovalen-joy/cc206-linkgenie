@@ -55,12 +55,22 @@ flutter:
   assets:
     - assets/logo.png
     - assets/link.png
+    - assets/shieldrencorp.png
 
   fonts:
-    - family: Roboto
-      fonts:
-        - asset: fonts/Roboto-Bold.ttf
-          weight: 100
+      - family: Roboto
+        fonts:
+          - asset: assets/fonts/Roboto-Regular.ttf
+          - asset: assets/fonts/Roboto-Bold.ttf
+
+      - family: Arimo
+        fonts:
+          - asset: assets/fonts/Arimo-Regular.ttf
+
+      - family: Anton
+        fonts:
+          - asset: assets/fonts/Anton-Regular.ttf
+      
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
