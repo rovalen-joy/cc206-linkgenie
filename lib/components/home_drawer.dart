@@ -1,5 +1,3 @@
-import 'package:cc206_linkgenie/features/about-us.dart';
-import 'package:cc206_linkgenie/features/frequently_asked_questions.dart';
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatelessWidget {
