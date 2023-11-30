@@ -1,6 +1,6 @@
-import 'package:cc206_linkgenie/components/home_drawer.dart';
+import 'package:cc206_linkgenie/features/about_us.dart';
 import 'package:flutter/material.dart';
-import 'features/input_and_color_selection.dart';
+import 'components/home_drawer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,14 +13,38 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'LinkGenie',
+        title: 'ABOUT US',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrangeAccent),
           useMaterial3: true,
         ),
         home: Scaffold(
           drawer: const HomeDrawer(),
-          body: const input_and_color_selection(),
+          appBar: AppBar(
+            title: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'LINKGENIE',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Roboto',
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Image.asset(
+                    'assets/logo.png',
+                    height: 40,
+                  ),
+                ],
+              ),
+            ),
+            backgroundColor: Color.fromARGB(255, 243, 108, 17),
+          ),
+          body: const About_Us(),
         ));
   }
 }

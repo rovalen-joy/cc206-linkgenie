@@ -71,10 +71,6 @@ flutter:
       - family: Anton
         fonts:
           - asset: assets/fonts/Anton-Regular.ttf
-      
-      - family: DM Serif Display
-        fonts:
-          - asset: assets/fonts/DMSerifDisplay-Regular.ttf
 
 
 
