@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart'; //Import for implementing color picker widget
 import 'package:qr_flutter/qr_flutter.dart'; //QR Flutter package for QR code generation
 import 'package:cc206_linkgenie/features/generate_qrcode.dart';
 import 'package:cc206_linkgenie/components/home_drawer.dart';
 import 'dart:ui'; // Import for using describeEnum
-import 'package:file_picker/file_picker.dart'; // Import for picking files from the device storage
 import 'dart:io'; // Import for using Dart's File and IO related classes
 import 'dart:typed_data'; // Import for working with byte data
 
-//Enum repsents the different types of inputs for QR code generation
+//Enum represents the different types of inputs for QR code generation
 enum InputType { text, url, pdf, image, video }
 
 //Created a StatefulWidget for input and color selection in the QR code generator
@@ -105,19 +103,7 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
     }
   }
 
-//Method to navigate to the QR code generation page
-  void navigateToQRCodePage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Generate_QR_Code(
-          data: data,
-          foregroundColor: foregroundColor,
-          backgroundColor: backgroundColor,
-        ),
-      ),
-    );
-  }
+}
 
 //Method to show alert dialog in case of errors or invalid input
   void _showAlertDialog(String message) {
@@ -139,3 +125,4 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
       },
     );
   }
+
