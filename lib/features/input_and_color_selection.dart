@@ -565,6 +565,7 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 50),
                   ],
                 ),
               ),

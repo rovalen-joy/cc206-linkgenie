@@ -56,11 +56,8 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/colorpicker.png
-    - assets/colorswatch.png
-    - assets/qr.png
     - assets/logo.png
-
+    - assets/link.png
   fonts:
       - family: Roboto
         fonts:
@@ -77,6 +74,7 @@ flutter:
       - family: DM Serif Display
         fonts:
           - asset: assets/fonts/DMSerifDisplay-Regular.ttf
+
 
 
   # The following line ensures that the Material Icons font is
