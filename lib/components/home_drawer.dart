@@ -23,27 +23,6 @@ class HomeDrawer extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.person_pin_rounded),
-            title: Text('About Us'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => About_Us()),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.question_answer),
-            title: Text('FAQ'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => FrequentlyAskedQuestions()),
-              );
-            },
-          ),
         ],
       ),
     );

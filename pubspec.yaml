@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  file_picker: ^6.1.1
+  flutter_colorpicker: ^0.6.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -39,6 +41,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  qr_flutter: ^4.1.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -53,18 +56,24 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/qrcode.png
     - assets/logo.png
-    - assets/qr.png
     - assets/link.png
-    - assets/colorswatch.png
-    - assets/colorpicker.png
-  
   fonts:
       - family: Roboto
         fonts:
-          - asset: fonts/Roboto-Bold.ttf
-            weight: 100
+          - asset: assets/fonts/Roboto-Bold.ttf
+
+      - family: Arimo
+        fonts:
+          - asset: assets/fonts/Arimo-Regular.ttf
+
+      - family: Anton
+        fonts:
+          - asset: assets/fonts/Anton-Regular.ttf
+      
+      - family: DM Serif Display
+        fonts:
+          - asset: assets/fonts/DMSerifDisplay-Regular.ttf
 
 
 
