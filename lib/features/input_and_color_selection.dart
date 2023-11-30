@@ -1,7 +1,10 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:ui'; // Import for using describeEnum
+import 'dart:io';// Import for using describeEnum
+import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:typed_data'; // Import for working with byte data
+import 'package:file_picker/file_picker.dart'; // Import for picking files from the device storage
+import 'package:cc206_linkgenie/components/home_drawer.dart';// Import for working with byte data
 
 enum InputType { text, url, pdf, image, video }
 
@@ -97,7 +100,6 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
     }
   }
 
-//Method to navigate to the QR code generation page
 
 //Method to show alert dialog in case of errors or invalid input
   void _showAlertDialog(String message) {
@@ -177,6 +179,7 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
       case InputType.pdf:
       case InputType.image:
       case InputType.video:
+      return _buildFileUploadButton();
       default:
         return SizedBox();
     }
@@ -199,9 +202,68 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
     );
   }
 
+  //Method to build file upload button for file-based (pdf, image, video) input types
+  Widget _buildFileUploadButton() {
+    String buttonText;
+    IconData iconData;
+
+    switch (_selectedInputType) {
+      case InputType.pdf:
+        buttonText = 'Upload PDF';
+        iconData = Icons.picture_as_pdf;
+        break;
+      case InputType.image:
+        buttonText = 'Upload Image';
+        iconData = Icons.image;
+        break;
+      case InputType.video:
+        buttonText = 'Upload Video';
+        iconData = Icons.videocam;
+        break;
+      default:
+        return SizedBox();
+    }
+
+    return ElevatedButton.icon(
+      onPressed: () async {
+        FilePickerResult? result = await FilePicker.platform.pickFiles(
+          type: FileType.custom,
+          allowedExtensions: _getFileExtensions(_selectedInputType),
+        );
+
+        if (result != null) {
+          PlatformFile file = result.files.first;
+          setState(() {
+            _selectedFile = File(file.path!);
+            String fileName = file.name ?? ''; // Extract file name being uploaded
+            data = fileName; // i Set ang file name for generating the qr code
+          });
+        } else {
+          print('User canceled file picking');
+        }
+      },
+      icon: Icon(iconData),
+      label: Text(buttonText),
+    );
+  }
+
+  // Helper method to get allowed file extensions based on the selected input type
+  List<String> _getFileExtensions(InputType type) {
+    switch (type) {
+      case InputType.pdf:
+        return ['pdf'];
+      case InputType.image:
+        return ['jpg', 'jpeg', 'png', 'gif'];
+      case InputType.video:
+        return ['mp4', 'mov', 'avi'];
+      default:
+        return [];
+    }
+  }
+
 @override
 Widget build(BuildContext context) {
-   double screenWidth = MediaQuery.of(context).size.width;
+  double screenWidth = MediaQuery.of(context).size.width;
   return Scaffold(
     body: SingleChildScrollView(
       child: Center(
@@ -277,26 +339,56 @@ Widget build(BuildContext context) {
                       )
                     ],
                   ),
+
                   SizedBox(height: 20),
-                  Text(
-                    'QR Code Preview',
-                    style: TextStyle(color: Colors.black, fontSize: 17),
-                  ),
-                  SizedBox(height: 20),
-                  Container(
-                    width: 300.0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 5),
-                        borderRadius: BorderRadius.circular(30),
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        boxShadow: [
-                          BoxShadow(blurRadius: 5.0, offset: Offset(5.0, 5.0)),
-                        ],
+                ]
+              )
+            ),
+            if (data
+                  .isNotEmpty) // Only show the QR code preview if the user entered text
+                Container(
+                  width: 200.0,
+                  height: 230.0,
+                  margin: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 3),
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(1.0),
+                        blurRadius: 5,
+                        offset: Offset(2, 2),
                       ),
-                      child: Image.asset('assets/qr.png'),
+                    ],
+                  ),
+
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'QR Code Preview',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 146, 146, 146),
+                            fontSize: 20,
+                            fontFamily: 'Anton',
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        Center(
+                          child: QrImageView(
+                            data: data,
+                            version: QrVersions.auto,
+                            size: 150.0,
+                            gapless: true,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                ),
                   SizedBox(height: 90),
                   ElevatedButton(
                     onPressed: know,
@@ -312,14 +404,14 @@ Widget build(BuildContext context) {
                     ),
                   ),
                   SizedBox(height: 20),
-               Container(
+              Container(
                 width: 0.6 * screenWidth,
                 child: Image.asset(
                   'assets/colorswatch.png',
                   fit: BoxFit.fitWidth,
                 ),
               ),
-                 SizedBox(height: 20),
+                SizedBox(height: 20),
                 Container(
                 width: 0.6 * screenWidth,
                 child: Image.asset(
@@ -327,7 +419,7 @@ Widget build(BuildContext context) {
                   fit: BoxFit.fitWidth,
                 ),
               ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -355,7 +447,7 @@ Widget build(BuildContext context) {
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                          left: 0.15,
+                          left: 80,
                         ),
                         child: ElevatedButton(
                           onPressed: know,
@@ -398,12 +490,11 @@ Widget build(BuildContext context) {
                           color: Color.fromARGB(255, 253, 250, 250), fontSize: 25),
                     ),
                   ),
+
+                  SizedBox(height: 90),
                 ],
               ),
             ),
-          ],
-        ),
-      ),
     ),
   );
 }
