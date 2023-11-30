@@ -21,6 +21,13 @@ class HomeDrawer extends StatelessWidget {
               ),
             ),
           ),
+          ListTile(
+            leading: Icon(Icons.question_answer),
+            title: Text('FAQ'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
         ],
       ),
     );
