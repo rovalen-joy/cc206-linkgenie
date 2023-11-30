@@ -64,7 +64,7 @@ flutter:
   fonts:
       - family: Roboto
         fonts:
-          - asset: fonts/Roboto-Bold.ttf
+          - asset: assets/fonts/Roboto-Bold.ttf
             weight: 100
 
 
