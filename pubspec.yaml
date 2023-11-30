@@ -58,6 +58,7 @@ flutter:
   assets:
     - assets/logo.png
     - assets/link.png
+    - assets/shieldrencorp.png
   fonts:
       - family: Roboto
         fonts:
