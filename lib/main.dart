@@ -1,9 +1,6 @@
 import 'package:cc206_linkgenie/components/home_drawer.dart';
 import 'package:flutter/material.dart';
-import 'features/input_and_color_selection.dart';
-import 'features/generate_qrcode.dart';
-import 'features/frequently_asked_questions.dart';
-import 'features/about-us.dart';
+import 'features/get_started.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,49 +33,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => MyHomePage(),
-        '/about-us': (context) => About_Us(),
-        '/faq': (context) => FrequentlyAskedQuestions(),
-        '/input-color': (context) => input_and_color_selection(),
-        '/generate-qrcode': (context) => Generate_QR_Code()
-      },
-    );
-  }
-}
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'LINKGENIE',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Roboto'),
-              ),
-              SizedBox(width: 8),
-              Image.asset(
-                'assets/logo.png',
-                height: 40,
-              ),
-            ],
-          ),
-        ),
-        backgroundColor: Color.fromARGB(255, 243, 108, 17),
-      ),
-      drawer: const HomeDrawer(),
-      body: input_and_color_selection(),
-    );
+home: Scaffold(
+          drawer: const HomeDrawer(),
+          body: const Get_Started(),
+));
   }
 }

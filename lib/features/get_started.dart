@@ -12,83 +12,93 @@ class Get_Started extends StatelessWidget {
 
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 180,
-                height: 180,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    'assets/logo.png',
-                    fit: BoxFit.cover,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 150,
+              height: 150,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  'assets/logo.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(height: 30),
+            Text(
+              'LINKGENIE',
+              style: TextStyle(
+                color: Colors.black87,
+                fontSize: 55,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              'QR CODE GENERATOR',
+              style: TextStyle(
+                color: Colors.black87,
+                fontSize: 20,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 100),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    Color.fromARGB(255, 243, 108, 17)),
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                  EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
+                ),
+              ),
+              onPressed: () {
+                  print('Input and Color Selection');
+              }, 
+              child: const Text(
+                'Get Started',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 20,
+                    fontFamily: 'Roboto'),
+              ),
+            ),
+            SizedBox(height: 100),
+            Container(
+              padding: EdgeInsets.only(bottom: 10.0),
+              child: Center(
+                child: Text(
+                  'Copyright © 2023 by The Shieldren Corp.',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 10,
                   ),
                 ),
               ),
-              SizedBox(height: 30),
-              Text(
-                '         LINKGENIE \nQR CODE GENERATOR',
-                textScaleFactor: 2.5,
-                style: TextStyle(color: const Color.fromARGB(255, 2, 2, 2), fontFamily: 'Roboto'),
-              ),
-              
-              SizedBox(height: 100),
-              ElevatedButton(
-  onPressed: () {
-    print('Input and Color Selection');
-  },
-  style: ButtonStyle(
-    backgroundColor: MaterialStateProperty.all<Color>(
-      Color.fromARGB(255, 243, 108, 17),
-    ),
-    shape: MaterialStateProperty.all<OutlinedBorder>(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
-      ),
-    ),
-    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-      EdgeInsets.symmetric(
-        vertical: 20.0,
-        horizontal: 25.0,
-      ),
-    ),
-  ),
-  child: const Text(
-    'Get Started',
-    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 20, fontFamily: 'Roboto'),
-  ),
-),
-
-
-              SizedBox(height: 100),
-              Container(
-                child: Center(
-                  child: Text(
-                    'Copyright © 2023 by The Shieldren',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 10,
-                    ),
-                  ),
+            ),
+            Container(
+              width: 35,
+              height: 35,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  'assets/shieldrencorp.png',
+                  fit: BoxFit.cover,
                 ),
               ),
-              Container(
-                width: 30,
-                height: 30,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    'assets/logo.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
+    )
     );
   }
 }

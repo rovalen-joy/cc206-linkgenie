@@ -59,6 +59,7 @@ flutter:
     - assets/link.png
     - assets/colorswatch.png
     - assets/colorpicker.png
+    - assets/shieldrencorp.png
   
   fonts:
       - family: Roboto

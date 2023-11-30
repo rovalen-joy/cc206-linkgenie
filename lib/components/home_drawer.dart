@@ -1,5 +1,3 @@
-import 'package:cc206_linkgenie/features/about-us.dart';
-import 'package:cc206_linkgenie/features/frequently_asked_questions.dart';
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -22,27 +20,6 @@ class HomeDrawer extends StatelessWidget {
                 fontSize: 24,
               ),
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.person_pin_rounded),
-            title: Text('About Us'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => About_Us()),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.question_answer),
-            title: Text('FAQ'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => FrequentlyAskedQuestions()),
-              );
-            },
           ),
         ],
       ),
