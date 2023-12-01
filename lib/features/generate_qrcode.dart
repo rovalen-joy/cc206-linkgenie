@@ -1,4 +1,6 @@
+import 'dart:async'; // library for handling asynchronous operations
 import 'dart:typed_data'; //library for working with typed data
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:io'; // library for working with files and the operating system
@@ -24,10 +26,6 @@ class _Generate_QR_CodeState extends State<Generate_QR_Code> {
   GlobalKey qrKey = GlobalKey(); // GlobalKey for capturing the QR code
   double _qrSize = 155.0; //initial size of the QR code
 
-  void know() {
-    // Define what should happen when the button is pressed
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +45,7 @@ class _Generate_QR_CodeState extends State<Generate_QR_Code> {
                 ),
               ),
               SizedBox(height: 70),
+
               RepaintBoundary(
                 // Wrap the Container with a RepaintBoundary to capture its contents as an image
                 key:
@@ -76,38 +75,88 @@ class _Generate_QR_CodeState extends State<Generate_QR_Code> {
                   ),
                 ),
               ),
-              SizedBox(height: 50),
+
+              //Adding a slider to adjust or resize the generated QR Code image
+              SizedBox(
+                height: 20.0,
+              ),
+
+              Slider(
+                  inactiveColor: Colors.orange,
+                  value: _qrSize,
+                  min: 100,
+                  max: 300,
+                  divisions: 200,
+                  label: '$_qrSize.', //display the current value
+                  onChanged: (value) {
+                    setState(() {
+                      _qrSize = value;
+                    });
+                  }),
+
+              Text(
+                'QR Code Size: ${_qrSize.round()}',
+                style: TextStyle(
+                    color: ui.Color.fromARGB(255, 11, 11, 11),
+                    fontSize: 20,
+                    fontFamily: 'Arimo'),
+              ),
+
+              SizedBox(height: 40),
+
+              // Button for Downloading the Generated QR Code
               ElevatedButton(
-                onPressed: know,
+                onPressed: () async {
+                  await _captureAndSavePng(context);
+                },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                      Color.fromARGB(255, 235, 111, 9)),
+                      Color.fromARGB(255, 253, 250, 246)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(40),
                     ),
                   ),
                   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                     EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 20.0), // Padding
+                      vertical: 20.0,
+                      horizontal: 20.0,
+                    ),
                   ),
                 ),
-                child: const Text(
-                  'Download QR Code',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 255, 253, 253), fontSize: 20),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Download QR Code',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color.fromARGB(255, 235, 111, 9),
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Icon(
+                      Icons.download,
+                      size: 20.0,
+                      color: Color.fromARGB(255, 235, 111, 9),
+                    ),
+                  ],
                 ),
               ),
+
+              // Generating Another QR Code
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: know,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                     Color.fromARGB(255, 235, 111, 9),
                   ),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(40),
                     ),
                   ),
                   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
@@ -121,15 +170,60 @@ class _Generate_QR_CodeState extends State<Generate_QR_Code> {
                   'Generate Another QR Code',
                   style: TextStyle(
                     color: Color.fromARGB(255, 255, 253, 253),
-                    fontSize: 20,
+                    fontSize: 15,
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),
       ),
     );
+  }
+
+  // Downloading and Saving the Generated QR Code
+  Future<void> _captureAndSavePng(BuildContext context) async {
+    // Asynchronous function to capture and save the QR code as a PNG image
+    try {
+      // Try to find the RenderRepaintBoundary associated with the qrKey
+      RenderRepaintBoundary boundary =
+          qrKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      ui.Image image = await boundary.toImage(
+          pixelRatio:
+              3.0); // Convert the boundary to an image with a pixel ratio of 3.0
+      ByteData? byteData = // Convert the image to bytes in PNG format
+          await image.toByteData(format: ui.ImageByteFormat.png);
+      Uint8List pngBytes = byteData!.buffer.asUint8List();
+
+      String fileName =
+          'LinkGenie-QR-Code'; // Define a base file name for the saved QR code
+      int i = 1;
+      final externalDir =
+          '/storage/emulated/0/Download'; // Define the directory path for saving the QR code image
+      while (await File('$externalDir/$fileName.png').exists()) {
+        fileName = 'linkgenie$i';
+        i++;
+      }
+
+      if (!await Directory(externalDir).exists()) {
+        // Check if the external directory exists, and create it if not
+        await Directory(externalDir).create(recursive: true);
+      }
+
+      final file = await File('$externalDir/$fileName.png')
+          .create(); // Create the file and write the PNG bytes to it
+      await file.writeAsBytes(pngBytes);
+
+      const snackBar = SnackBar(
+          content: Text(
+              'Successfully save the QR Code to the Gallery!')); // Display a snackbar notifying the user that the QR code has been saved
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (e) {
+      // If an error occurs, display a snackbar with an error message
+      const snackBar =
+          SnackBar(content: Text('Warning: Unable to save the QR Code'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 }
 
