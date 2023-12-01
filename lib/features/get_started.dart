@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:cc206_linkgenie/features/input_and_color_selection.dart';
 
 class Get_Started extends StatelessWidget {
   const Get_Started({Key? key}) : super(key: key);
 
-  void know() {
-    // Define what should happen when the button is pressed
-  }
-
   @override
   Widget build(BuildContext context) {
-
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -48,6 +43,12 @@ class Get_Started extends StatelessWidget {
             ),
             SizedBox(height: 100),
             ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => input_and_color_selection()));
+              },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
                     Color.fromARGB(255, 243, 108, 17)),
@@ -60,9 +61,6 @@ class Get_Started extends StatelessWidget {
                   EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
                 ),
               ),
-              onPressed: () {
-                  print('Input and Color Selection');
-              }, 
               child: const Text(
                 'Get Started',
                 style: TextStyle(
@@ -98,7 +96,6 @@ class Get_Started extends StatelessWidget {
           ],
         ),
       ),
-    )
     );
   }
 }

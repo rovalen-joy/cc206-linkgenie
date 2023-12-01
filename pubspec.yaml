@@ -75,12 +75,6 @@ flutter:
       - family: Anton
         fonts:
           - asset: assets/fonts/Anton-Regular.ttf
-      
-      - family: DM Serif Display
-        fonts:
-          - asset: assets/fonts/DMSerifDisplay-Regular.ttf
-
-
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

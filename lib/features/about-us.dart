@@ -12,21 +12,20 @@ class About_Us extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title:Text(
-                'ABOUT US',
-                style: TextStyle(
-                  color: const Color.fromARGB(255, 255, 254, 254),
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Roboto',
-                ),
+        title: Text(
+          'ABOUT US',
+          style: TextStyle(
+            color: const Color.fromARGB(255, 255, 254, 254),
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Roboto',
           ),
-          backgroundColor: Color.fromARGB(255, 243, 108, 17),
         ),
-        
-        body: SingleChildScrollView(
+        backgroundColor: Color.fromARGB(255, 243, 108, 17),
+      ),
+      body: SingleChildScrollView(
         child: Center(
-          child: Container(
+          child: Padding(
             padding: EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -43,6 +42,29 @@ class About_Us extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 100.0),
+                          child: Text(
+                            'LINKGENIE',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 30,
+                              //fontWeight: FontWeight.bold,
+                              fontFamily: 'Anton',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 10),
                 Row(
@@ -79,7 +101,7 @@ class About_Us extends StatelessWidget {
                     ),
                   ],
                 ),
-                Text( // This is for the Version Content
+                Text(
                   'VERSION 2.0',
                   style: TextStyle(fontSize: 17, fontFamily: 'Anton'),
                 ),
@@ -170,27 +192,26 @@ class About_Us extends StatelessWidget {
                   ),
                 ),
                 Text(
-                    'Do you have questions or need help? Reach out to us through: ',
-                    style: TextStyle(fontWeight: FontWeight.w300, 
-                    fontSize: 11),
-                    ),
+                  'Do you have questions or need help? Reach out to us through: ',
+                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 11),
+                ),
                 Text(
                   'Email: supporttheshieldren@gmail.com',
                   style: TextStyle(
                     decoration: TextDecoration.underline,
                     fontWeight: FontWeight.w300,
-                    fontSize: 11,),
-                ),
-                Text('Support Center: Linkgenie_theshieldren Help desk',
-                  style: TextStyle(fontWeight: FontWeight.w300, 
-                  fontSize: 11),
+                    fontSize: 11,
                   ),
-
+                ),
+                Text(
+                  'Support Center: Linkgenie_theshieldren Help desk',
+                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 11),
+                ),
                 SizedBox(height: 80),
                 Container(
                   child: Center(
                     child: Text(
-                      'Copyright © 2023 by The Shieldren',
+                      'Copyright © 2023 by The Shieldren Corp.',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
                     ),

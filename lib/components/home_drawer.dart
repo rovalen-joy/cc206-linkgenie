@@ -1,3 +1,7 @@
+import 'package:cc206_linkgenie/features/about-us.dart';
+import 'package:cc206_linkgenie/features/frequently_asked_questions.dart';
+import 'package:cc206_linkgenie/features/input_and_color_selection.dart';
+import 'package:cc206_linkgenie/features/get_started.dart';
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -14,7 +18,7 @@ class HomeDrawer extends StatelessWidget {
               color: Color.fromARGB(255, 243, 108, 17),
             ),
             child: Text(
-              'Link Genie',
+              'LINKGENIE',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -26,13 +30,20 @@ class HomeDrawer extends StatelessWidget {
             title: Text('About Us'),
             onTap: () {
               Navigator.pop(context);
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => About_Us()),
+              );
             },
           ),
           ListTile(
             leading: Icon(Icons.question_answer),
-            title: Text('FAQ'),
+            title: Text('Frequently Asked Questions'),
             onTap: () {
               Navigator.pop(context);
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (context) => FrequentlyAskedQuestions()),
+              );
             },
           ),
         ],
