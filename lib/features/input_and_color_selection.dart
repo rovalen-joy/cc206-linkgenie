@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart'; //Import for implementing color picker widget
+import 'package:qr_flutter/qr_flutter.dart'; //QR Flutter package for QR code generation
+import 'package:cc206_linkgenie/features/generate_qrcode.dart';
+import 'package:cc206_linkgenie/components/home_drawer.dart';
 import 'dart:ui'; // Import for using describeEnum
-import 'dart:io'; // Import for using describeEnum
-import 'package:qr_flutter/qr_flutter.dart';
-import 'dart:typed_data'; // Import for working with byte data
 import 'package:file_picker/file_picker.dart'; // Import for picking files from the device storage
-import 'package:cc206_linkgenie/components/home_drawer.dart'; // Import for working with byte data
+import 'dart:io'; // Import for using Dart's File and IO related classes
+import 'dart:typed_data'; // Import for working with byte data
 
+//Enum repsents the different types of inputs for QR code generation
 enum InputType { text, url, pdf, image, video }
 
 //Created a StatfulWidget for input and color selection in the QR code generator
@@ -15,10 +17,6 @@ class input_and_color_selection extends StatefulWidget {
   @override
   _input_and_color_selectionState createState() =>
       _input_and_color_selectionState();
-}
-
-void know() {
-  // Define what should happen when the button is pressed
 }
 
 //State class for the input and color selection screen
@@ -95,13 +93,30 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
         setState(() {
           data = _textController.text;
         });
+        navigateToQRCodePage();
       }
     } else {
       // Handling file inputs (pdf, image, video)
       if (_selectedFile == null) {
         _showAlertDialog('You did not upload any file!');
-      } else {}
+      } else {
+        navigateToQRCodePage();
+      }
     }
+  }
+
+//Method to navigate to the QR code generation page
+  void navigateToQRCodePage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Generate_QR_Code(
+          data: data,
+          foregroundColor: foregroundColor,
+          backgroundColor: backgroundColor,
+        ),
+      ),
+    );
   }
 
 //Method to show alert dialog in case of errors or invalid input
@@ -125,7 +140,7 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
     );
   }
 
-// Method to show the color picker dialog
+  // Method to show the color picker dialog
   void showColorPicker(Color currentColor, Function(Color) onColorChanged) {
     showDialog(
       context: context,
@@ -217,7 +232,6 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
         iconData = Icons.device_unknown;
     }
     ;
-
     SizedBox(height: 20);
 
     return IconButton(
@@ -236,7 +250,7 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
     );
   }
 
-  //Method to build the input widget based on selected input type
+//Method to build the input widget based on selected input type
   Widget _buildInputWidget() {
     String labelText;
 
@@ -273,7 +287,7 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
     );
   }
 
-  //Method to build file upload button for file-based (pdf, image, video) input types
+//Method to build file upload button for file-based (pdf, image, video) input types
   Widget _buildFileUploadButton() {
     String buttonText;
     IconData iconData;
@@ -305,10 +319,9 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
         if (result != null) {
           PlatformFile file = result.files.first;
           setState(() {
-            _selectedFile = File(file.path!);
-            String fileName =
-                file.name ?? ''; // Extract file name being uploaded
-            data = fileName; // i Set ang file name for generating the qr code
+            _selectedFile = File(file.name);
+            data = _selectedFile!
+                .path; // Set the file path to data for QR code generation
           });
         } else {
           print('User canceled file picking');
@@ -319,7 +332,7 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
     );
   }
 
-  // Helper method to get allowed file extensions based on the selected input type
+// Helper method to get allowed file extensions based on the selected input type
   List<String> _getFileExtensions(InputType type) {
     switch (type) {
       case InputType.pdf:
@@ -565,7 +578,6 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 50),
                   ],
                 ),
               ),
@@ -707,27 +719,64 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
 
               //Generate QR Code button
               ElevatedButton(
-                onPressed: know,
+                onPressed: () {
+                  // Checking for text or URL input types
+                  if (_selectedInputType == InputType.text ||
+                      _selectedInputType == InputType.url) {
+                    if (_textController.text.isEmpty) {
+                      _showAlertDialog('You did not input anything!');
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Generate_QR_Code(
+                            data: _textController
+                                .text, // Pass the text or URL as data
+                            foregroundColor: foregroundColor,
+                            backgroundColor: backgroundColor,
+                          ),
+                        ),
+                      );
+                    }
+                  } else {
+                    // For file inputs (PDF, Image, Video)
+                    if (data.isEmpty) {
+                      _showAlertDialog('You did not upload any file!');
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Generate_QR_Code(
+                            data:
+                                data, // Pass the file data as generated from file upload
+                            foregroundColor: foregroundColor,
+                            backgroundColor: backgroundColor,
+                          ),
+                        ),
+                      );
+                    }
+                  }
+                },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                       Color.fromARGB(255, 235, 111, 9)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                    EdgeInsets.symmetric(vertical: 25.0, horizontal: 25.0),
+                    EdgeInsets.symmetric(vertical: 13.0, horizontal: 13.0),
                   ),
                 ),
                 child: const Text(
                   'Generate QR Code',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 253, 250, 250), fontSize: 25),
+                      color: Color.fromARGB(255, 253, 250, 250), fontSize: 18),
                 ),
               ),
 
-              SizedBox(height: 90),
+              SizedBox(height: 50),
             ],
           ),
         ),
