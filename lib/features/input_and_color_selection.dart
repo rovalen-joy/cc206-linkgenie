@@ -7,7 +7,7 @@ import 'dart:typed_data'; // Import for working with byte data
 import 'package:file_picker/file_picker.dart'; // Import for picking files from the device storage
 import 'package:cc206_linkgenie/components/home_drawer.dart'; // Import for working with byte data
 
-enum InputType { text, url, pdf, image, video }
+enum InputType { text, url}
 
 //Created a StatfulWidget for input and color selection in the QR code generator
 class input_and_color_selection extends StatefulWidget {
@@ -65,19 +65,6 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
         // Validate URL format
         final urlPattern = RegExp(r'^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$');
         return urlPattern.hasMatch(input);
-      case InputType.pdf:
-        // Validate if input ends with .pdf (basic validation)
-        return input.toLowerCase().endsWith('.pdf');
-      case InputType.image:
-        // Validate if input ends with common image file extensions
-        final imagePattern =
-            RegExp(r'\.(jpeg|jpg|png|gif|bmp)$', caseSensitive: false);
-        return imagePattern.hasMatch(input);
-      case InputType.video:
-        // Validate if input ends with common video file extensions
-        final videoPattern =
-            RegExp(r'\.(mp4|mov|wmv|flv|avi)$', caseSensitive: false);
-        return videoPattern.hasMatch(input);
       default:
         return true;
     }
@@ -96,12 +83,7 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
           data = _textController.text;
         });
       }
-    } else {
-      // Handling file inputs (pdf, image, video)
-      if (_selectedFile == null) {
-        _showAlertDialog('You did not upload any file!');
-      } else {}
-    }
+    } 
   }
 
 //Method to show alert dialog in case of errors or invalid input
@@ -204,38 +186,27 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
       case InputType.url:
         iconData = Icons.link;
         break;
-      case InputType.pdf:
-        iconData = Icons.picture_as_pdf;
-        break;
-      case InputType.image:
-        iconData = Icons.image;
-        break;
-      case InputType.video:
-        iconData = Icons.videocam;
-        break;
       default:
-        iconData = Icons.device_unknown;
+        iconData = Icons.device_unknown; // default icon
     }
-    ;
 
-    SizedBox(height: 20);
-
-    return IconButton(
-      // Input Data IconButton
-      icon: Icon(
-        iconData,
-        size: 30, // Set the desired size here (you can adjust as needed)
-        color: isSelected ? Colors.orange : Color.fromARGB(255, 156, 155, 155),
+    return ElevatedButton.icon(
+      icon: Icon(iconData),
+      label: Text(
+        enumToString(type),
+        style: TextStyle(color: isSelected ? Colors.orange : Colors.white),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: isSelected ? Colors.white : Colors.orange,
+        onPrimary: isSelected ? Colors.orange : Colors.white,
       ),
       onPressed: () {
         setState(() {
           _selectedInputType = type;
-          _selectedFile = null;
         });
       },
     );
   }
-
   //Method to build the input widget based on selected input type
   Widget _buildInputWidget() {
     String labelText;
@@ -247,10 +218,6 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
       case InputType.url:
         labelText = 'Enter any URL to generate';
         break;
-      case InputType.pdf:
-      case InputType.image:
-      case InputType.video:
-        return _buildFileUploadButton();
       default:
         return SizedBox();
     }
@@ -258,79 +225,14 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
     return TextField(
       controller: _textController,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         labelText: labelText,
-        //Adjust the height of text and URL button
-        constraints: BoxConstraints(
-          maxHeight: 79.0,
-        ),
         border: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.black),
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(20),
         ),
       ),
-      maxLength: 350, // Limiting the input to 350 characters
+      maxLength: 350, // Limiting the input to 250 characters
     );
-  }
-
-  //Method to build file upload button for file-based (pdf, image, video) input types
-  Widget _buildFileUploadButton() {
-    String buttonText;
-    IconData iconData;
-
-    switch (_selectedInputType) {
-      case InputType.pdf:
-        buttonText = 'Upload PDF';
-        iconData = Icons.picture_as_pdf;
-        break;
-      case InputType.image:
-        buttonText = 'Upload Image';
-        iconData = Icons.image;
-        break;
-      case InputType.video:
-        buttonText = 'Upload Video';
-        iconData = Icons.videocam;
-        break;
-      default:
-        return SizedBox();
-    }
-
-    return ElevatedButton.icon(
-      onPressed: () async {
-        FilePickerResult? result = await FilePicker.platform.pickFiles(
-          type: FileType.custom,
-          allowedExtensions: _getFileExtensions(_selectedInputType),
-        );
-
-        if (result != null) {
-          PlatformFile file = result.files.first;
-          setState(() {
-            _selectedFile = File(file.path!);
-            String fileName =
-                file.name ?? ''; // Extract file name being uploaded
-            data = fileName; // i Set ang file name for generating the qr code
-          });
-        } else {
-          print('User canceled file picking');
-        }
-      },
-      icon: Icon(iconData),
-      label: Text(buttonText),
-    );
-  }
-
-  // Helper method to get allowed file extensions based on the selected input type
-  List<String> _getFileExtensions(InputType type) {
-    switch (type) {
-      case InputType.pdf:
-        return ['pdf'];
-      case InputType.image:
-        return ['jpg', 'jpeg', 'png', 'gif'];
-      case InputType.video:
-        return ['mp4', 'mov', 'avi'];
-      default:
-        return [];
-    }
   }
 
   @override
@@ -447,14 +349,14 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
               //QR Code Preview button
 
               if (data
-                  .isNotEmpty) // Only show the QR code preview if the user entered valid data
+                  .isNotEmpty) // Only show the QR code preview if the user entered text
                 Container(
-                  width: 200.0,
-                  height: 230.0,
+                  width: 360.0,
+                  height: 410.0,
                   margin: EdgeInsets.all(10),
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    border: Border.all(width: 3),
+                    border: Border.all(width: 4),
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
                     boxShadow: [
@@ -473,7 +375,7 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
                           'QR Code Preview',
                           style: TextStyle(
                             color: Color.fromARGB(255, 146, 146, 146),
-                            fontSize: 20,
+                            fontSize: 25,
                             fontFamily: 'Anton',
                           ),
                         ),
@@ -482,7 +384,7 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
                           child: QrImageView(
                             data: data,
                             version: QrVersions.auto,
-                            size: 150.0,
+                            size: 300.0,
                             gapless: true,
                             foregroundColor: foregroundColor,
                             backgroundColor: backgroundColor,
@@ -492,9 +394,7 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
                     ),
                   ),
                 ),
-
-              SizedBox(height: 40),
-
+              SizedBox(height: 20),
               // Color swatch integration
               Container(
                 width: 300,
