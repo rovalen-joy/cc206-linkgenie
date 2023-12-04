@@ -17,6 +17,7 @@ class FAQPage extends StatefulWidget {
 }
 
 class _FAQPageState extends State<FAQPage> {
+  // List to track the expansion state of each panel
   List<bool> _isExpandedList = [false, false, false, false, false, false];
 
   @override
@@ -39,6 +40,7 @@ class _FAQPageState extends State<FAQPage> {
         padding: const EdgeInsets.all(20.0),
         child: ListView(
           children: [
+            // Introduction text for FAQs
             Text(
               'I’m new to LinkGenie QR Code Generator. What should I know? Glad you asked! Here’s a few basics to get you started.',
               textAlign: TextAlign.center,
@@ -50,16 +52,17 @@ class _FAQPageState extends State<FAQPage> {
               ),
             ),
             SizedBox(height: 20.0),
+             // ExpansionPanelList to display FAQs
             ExpansionPanelList(
               elevation: 1,
               expandedHeaderPadding: EdgeInsets.all(0),
-              expansionCallback: (panelIndex, isExpanded) {
+              expansionCallback: (panelIndex, isExpanded) { // Callback to handle panel expansion/collapse
                 setState(() {
                   _isExpandedList[panelIndex] = !isExpanded;
                 });
               },
               children: [
-                _buildExpansionPanel(
+                _buildExpansionPanel( // Expansion panels for each FAQ item
                     index: 0,
                     title: 'What is a QR Code?',
                     body:
@@ -110,7 +113,7 @@ class _FAQPageState extends State<FAQPage> {
       ),
     );
   }
-
+// Function to build ExpansionPanel widgets
   ExpansionPanel _buildExpansionPanel({
     required int index,
     required String title,
@@ -121,6 +124,7 @@ class _FAQPageState extends State<FAQPage> {
     return ExpansionPanel(
       backgroundColor: color,
       headerBuilder: (BuildContext context, bool isExpanded) {
+        // Gesture detector for the panel header
         return GestureDetector(
           onTap: () {
             setState(() {
