@@ -137,7 +137,7 @@ class About_Us extends StatelessWidget {
                         ),
                         SizedBox(height: 30),
                         Text(
-                          '   ✦  You can generate QR Codes for any data, including text, URLs, PDFs, images, or videos of your choice.',
+                          '   ✦  You can generate QR Codes for Text and  URLs of your choice, and a preview of the QR Code will automatically shown.',
                           style: TextStyle(
                             fontSize: 10.5,
                             fontWeight: FontWeight.w500,
