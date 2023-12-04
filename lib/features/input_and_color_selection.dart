@@ -4,12 +4,10 @@ import 'package:qr_flutter/qr_flutter.dart'; //QR Flutter package for QR code ge
 import 'package:cc206_linkgenie/features/generate_qrcode.dart';
 import 'package:cc206_linkgenie/components/home_drawer.dart';
 import 'dart:ui'; // Import for using describeEnum
-import 'package:file_picker/file_picker.dart'; // Import for picking files from the device storage
 import 'dart:io'; // Import for using Dart's File and IO related classes
-import 'dart:typed_data'; // Import for working with byte data
 
-//Enum repsents the different types of inputs for QR code generation
-enum InputType { text, url, pdf, image, video }
+//Enum represents the different types of inputs for QR code generation
+enum InputType { text, url }
 
 //Created a StatfulWidget for input and color selection in the QR code generator
 class input_and_color_selection extends StatefulWidget {
@@ -63,19 +61,6 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
         // Validate URL format
         final urlPattern = RegExp(r'^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$');
         return urlPattern.hasMatch(input);
-      case InputType.pdf:
-        // Validate if input ends with .pdf (basic validation)
-        return input.toLowerCase().endsWith('.pdf');
-      case InputType.image:
-        // Validate if input ends with common image file extensions
-        final imagePattern =
-            RegExp(r'\.(jpeg|jpg|png|gif|bmp)$', caseSensitive: false);
-        return imagePattern.hasMatch(input);
-      case InputType.video:
-        // Validate if input ends with common video file extensions
-        final videoPattern =
-            RegExp(r'\.(mp4|mov|wmv|flv|avi)$', caseSensitive: false);
-        return videoPattern.hasMatch(input);
       default:
         return true;
     }
@@ -93,13 +78,6 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
         setState(() {
           data = _textController.text;
         });
-        navigateToQRCodePage();
-      }
-    } else {
-      // Handling file inputs (pdf, image, video)
-      if (_selectedFile == null) {
-        _showAlertDialog('You did not upload any file!');
-      } else {
         navigateToQRCodePage();
       }
     }
@@ -219,32 +197,23 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
       case InputType.url:
         iconData = Icons.link;
         break;
-      case InputType.pdf:
-        iconData = Icons.picture_as_pdf;
-        break;
-      case InputType.image:
-        iconData = Icons.image;
-        break;
-      case InputType.video:
-        iconData = Icons.videocam;
-        break;
       default:
-        iconData = Icons.device_unknown;
+        iconData = Icons.device_unknown; // default icon
     }
-    ;
-    SizedBox(height: 20);
 
-    return IconButton(
-      // Input Data IconButton
-      icon: Icon(
-        iconData,
-        size: 30, // Set the desired size here (you can adjust as needed)
-        color: isSelected ? Colors.orange : Color.fromARGB(255, 156, 155, 155),
+    return ElevatedButton.icon(
+      icon: Icon(iconData),
+      label: Text(
+        enumToString(type),
+        style: TextStyle(color: isSelected ? Colors.white : Colors.orange),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: isSelected ? Colors.orange : Colors.white,
+        onPrimary: isSelected ? Colors.white : Colors.orange,
       ),
       onPressed: () {
         setState(() {
           _selectedInputType = type;
-          _selectedFile = null;
         });
       },
     );
@@ -261,10 +230,6 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
       case InputType.url:
         labelText = 'Enter any URL to generate';
         break;
-      case InputType.pdf:
-      case InputType.image:
-      case InputType.video:
-        return _buildFileUploadButton();
       default:
         return SizedBox();
     }
@@ -285,65 +250,6 @@ class _input_and_color_selectionState extends State<input_and_color_selection> {
       ),
       maxLength: 350, // Limiting the input to 350 characters
     );
-  }
-
-//Method to build file upload button for file-based (pdf, image, video) input types
-  Widget _buildFileUploadButton() {
-    String buttonText;
-    IconData iconData;
-
-    switch (_selectedInputType) {
-      case InputType.pdf:
-        buttonText = 'Upload PDF';
-        iconData = Icons.picture_as_pdf;
-        break;
-      case InputType.image:
-        buttonText = 'Upload Image';
-        iconData = Icons.image;
-        break;
-      case InputType.video:
-        buttonText = 'Upload Video';
-        iconData = Icons.videocam;
-        break;
-      default:
-        return SizedBox();
-    }
-
-    return ElevatedButton.icon(
-      onPressed: () async {
-        FilePickerResult? result = await FilePicker.platform.pickFiles(
-          type: FileType.custom,
-          allowedExtensions: _getFileExtensions(_selectedInputType),
-        );
-
-        if (result != null) {
-          PlatformFile file = result.files.first;
-          setState(() {
-            _selectedFile = File(file.name);
-            data = _selectedFile!
-                .path; // Set the file path to data for QR code generation
-          });
-        } else {
-          print('User canceled file picking');
-        }
-      },
-      icon: Icon(iconData),
-      label: Text(buttonText),
-    );
-  }
-
-// Helper method to get allowed file extensions based on the selected input type
-  List<String> _getFileExtensions(InputType type) {
-    switch (type) {
-      case InputType.pdf:
-        return ['pdf'];
-      case InputType.image:
-        return ['jpg', 'jpeg', 'png', 'gif'];
-      case InputType.video:
-        return ['mp4', 'mov', 'avi'];
-      default:
-        return [];
-    }
   }
 
   @override
